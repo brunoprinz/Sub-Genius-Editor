@@ -1,0 +1,25 @@
+export interface Subtitle {
+  id: string;
+  startTime: number; // in seconds
+  endTime: number; // in seconds
+  text: string;
+}
+
+export interface StyleConfig {
+  fontSize: number;
+  fontFamily: string;
+  color: string; // Hex
+  outlineColor: string; // Hex
+  outlineWidth: number;
+  verticalAlign: 'bottom' | 'top' | 'center';
+  bottomMargin: number;
+  backgroundColor: string; // Hex
+  backgroundOpacity: number; // 0-255
+}
+
+export enum AppState {
+  IDLE,
+  PROCESSING,
+  READY,
+  ERROR
+}
