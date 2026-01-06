@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Subtitle, StyleConfig, AppState } from './types';
 import { Player } from './components/Player';
 import { Editor } from './components/Editor';
@@ -212,7 +212,7 @@ function App() {
 
         const bitrate = safeWidth * safeHeight * 2; // Approximate bitrate calculation
         videoEncoder.configure({
-            codec: 'avc1.42001f', // Baseline profile
+            codec: 'avc1.42E028', // Baseline profile
             width: safeWidth,
             height: safeHeight,
             bitrate: bitrate, 
