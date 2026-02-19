@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Subtitle } from '../types';
 
 interface GeminiImportProps {
@@ -6,12 +6,21 @@ interface GeminiImportProps {
   onClose: () => void;
 }
 
-const promptParaGemini = `Analise o áudio deste vídeo e gere legendas em Português. 
+const promptParaGemini = `Olá! Por favor, atue como um mestre em acessibilidade e legendagem profissional (Padrão Netflix). 
+Analise o áudio deste vídeo completo com calma e precisão para gerar legendas no idioma nativo do vídeo.
+
+Regras de Ouro:
+1. Máximo de 39 caracteres por linha (muito importante!).
+2. Máximo de 95 caracteres por trecho de legenda.
+3. Se a frase for longa, por favor, quebre-a em duas legendas separadas no tempo para manter o conforto visual.
+
 Retorne APENAS um array JSON puro, sem textos explicativos, seguindo este formato exato:
 [
-  {"id": "1", "startTime": 0.5, "endTime": 3.2, "text": "Frase falada aqui"},
-  {"id": "2", "startTime": 3.5, "endTime": 6.0, "text": "Próxima frase"}
-]`;
+  {"id": "1", "startTime": 0.5, "endTime": 3.2, "text": "Frase falada aqui\\nSegunda linha se houver"},
+  {"id": "2", "startTime": 3.5, "endTime": 6.0, "text": "Próxima frase curta"}
+]
+
+Muito obrigado pelo seu esforço e precisão, seu trabalho é fundamental para este projeto!`;
 
 export const GeminiImport: React.FC<GeminiImportProps> = ({ onImport, onClose }) => {
   const [rawJson, setRawJson] = useState('');
