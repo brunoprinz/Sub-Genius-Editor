@@ -44,15 +44,12 @@ const defaultStyle: StyleConfig = {
   outlineColor: '#000000',
   outlineWidth: 2,
   verticalAlign: 'bottom',
-  bottomMargin: 30,
+  bottomMargin: 40,
   backgroundColor: '#000000',
-  backgroundOpacity: 0
-  // ADICIONE ESTAS DUAS LINHAS ABAIXO:
-  
-maxCharsPerLine: 39,
-  
-maxCharsPerSubtitle: 95,
-};
+  backgroundOpacity: 128, // Certifique-se que esta vírgula existe!
+  maxCharsPerLine: 39,    // E que estas linhas estão ANTES do fechamento }
+  maxCharsPerSubtitle: 95
+}; // <--- A chave de fechamento tem que ser DEPOIS de tudo
 
 // Canvas Subtitle Renderer
 const drawSubtitles = (ctx: CanvasRenderingContext2D, subtitles: Subtitle[], time: number, style: StyleConfig, width: number, height: number) => {
