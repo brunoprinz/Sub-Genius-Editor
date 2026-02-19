@@ -8,16 +8,13 @@
 export interface StyleConfig {
   fontSize: number;
   fontFamily: string;
-  color: string;
-  outlineColor: string;
+  color: string; // Hex
+  outlineColor: string; // Hex
   outlineWidth: number;
   verticalAlign: 'bottom' | 'top' | 'center';
   bottomMargin: number;
-  backgroundColor: string;
-  backgroundOpacity: number;
-  // ELAS PRECISAM FICAR AQUI DENTRO:
-  maxCharsPerLine: number;     
-  maxCharsPerSubtitle: number; 
+  backgroundColor: string; // Hex
+  backgroundOpacity: number; // 0-255
 }
 
 export enum AppState {
@@ -27,5 +24,9 @@ export enum AppState {
   ERROR
 }
 
+maxCharsPerLine: number;     // Adicione esta
+  
+maxCharsPerSubtitle: number; // E esta
 
 
+}
