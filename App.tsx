@@ -47,6 +47,11 @@ const defaultStyle: StyleConfig = {
   bottomMargin: 30,
   backgroundColor: '#000000',
   backgroundOpacity: 0
+  // ADICIONE ESTAS DUAS LINHAS ABAIXO:
+  
+maxCharsPerLine: 39,
+  
+maxCharsPerSubtitle: 95,
 };
 
 // Canvas Subtitle Renderer

@@ -50,10 +50,14 @@ export const Editor: React.FC<EditorProps> = ({
           const isActive = currentTime >= sub.startTime && currentTime <= sub.endTime;
           
           // Lógica do Limitador Inteligente
-          const lines = sub.text.split('\n');
-          const hasLineExceeded = lines.some(line => line.length > (styleConfig.maxCharsPerLine || 39));
-          const hasTotalExceeded = sub.text.length > (styleConfig.maxCharsPerSubtitle || 95);
-          const isOverLimit = hasLineExceeded || hasTotalExceeded;
+// Lógica do Limitador Inteligente blindada
+const lines = sub.text.split('\n');
+const maxLine = styleConfig?.maxCharsPerLine || 39;
+const maxTotal = styleConfig?.maxCharsPerSubtitle || 95;
+
+const hasLineExceeded = lines.some(line => line.length > maxLine); // Usando a constante segura
+const hasTotalExceeded = sub.text.length > maxTotal; // Usando a constante segura
+const isOverLimit = hasLineExceeded || hasTotalExceeded;
 
           return (
             <div 
