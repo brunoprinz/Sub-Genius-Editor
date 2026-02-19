@@ -7,19 +7,24 @@ const toAssColor = (hex: string, alpha: number = 0): string => {
   const r = cleanHex.substring(0, 2);
   const g = cleanHex.substring(2, 4);
   const b = cleanHex.substring(4, 6);
+  // Alpha in ASS is 00 (opaque) to FF (transparent), opposite of standard
+  // We accept alpha as 0 (opaque) to 255 (transparent)
   const aHex = alpha.toString(16).padStart(2, '0').toUpperCase();
+  
   return `&H${aHex}${b}${g}${r}`;
 };
 
 export const generateASS = (subtitles: Subtitle[], style: StyleConfig, videoWidth: number, videoHeight: number): string => {
+  const formattedText = sub.text.replace(/\n/g, '\\N');
   // Determine alignment code (ASS tags)
+  // 2 = Bottom Center, 8 = Top Center, 5 = Center
   let alignment = 2;
   if (style.verticalAlign === 'top') alignment = 8;
   if (style.verticalAlign === 'center') alignment = 5;
 
   const primaryColor = toAssColor(style.color);
   const outlineColor = toAssColor(style.outlineColor);
-  const backColor = toAssColor(style.backgroundColor, 255 - style.backgroundOpacity);
+  const backColor = toAssColor(style.backgroundColor, 255 - style.backgroundOpacity); // Convert opacity to transparency
 
   // ASS Header
   const header = `[Script Info]
@@ -36,11 +41,8 @@ Style: Default,${style.fontFamily},${style.fontSize},${primaryColor},&H000000FF,
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 `;
 
-  // Aqui geramos as linhas de legenda
   const events = subtitles.map(sub => {
-    // Transformamos o "Enter" em \N para o arquivo ASS
-    const textWithLineBreaks = sub.text.replace(/\n/g, '\\N');
-    return `Dialogue: 0,${formatTimeASS(sub.startTime)},${formatTimeASS(sub.endTime)},Default,,0,0,0,,${textWithLineBreaks}`;
+    return `Dialogue: 0,${formatTimeASS(sub.startTime)},${formatTimeASS(sub.endTime)},Default,,0,0,0,,${sub.text}`;
   }).join('\n');
 
   return header + events;

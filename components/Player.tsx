@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+﻿import React, { useRef, useEffect, useState } from 'react';
 import { StyleConfig, Subtitle } from '../types';
 
 interface PlayerProps {
@@ -109,20 +109,26 @@ export const Player: React.FC<PlayerProps> = ({
           style={getContainerPosition()}
         >
           <span
-            style={{
-              fontFamily: styleConfig.fontFamily,
-              fontSize: `${styleConfig.fontSize}px`,
-              color: styleConfig.color,
-              textShadow: getOutlineStyle(),
-              backgroundColor: styleConfig.backgroundOpacity > 0 ? hexToRgba(styleConfig.backgroundColor, styleConfig.backgroundOpacity) : 'transparent',
-              padding: '4px 8px',
-              borderRadius: '4px',
-              textAlign: 'center',
-              lineHeight: 1.2
-            }}
-          >
-            {activeSubtitle.text}
-          </span>
+  style={{
+    fontFamily: styleConfig.fontFamily,
+    fontSize: `${styleConfig.fontSize}px`,
+    color: styleConfig.color,
+    textShadow: getOutlineStyle(),
+    backgroundColor: styleConfig.backgroundOpacity > 0 ? hexToRgba(styleConfig.backgroundColor, styleConfig.backgroundOpacity) : 'transparent',
+    padding: '4px 8px',
+    borderRadius: '4px',
+    textAlign: 'center',
+    lineHeight: 1.2,
+    // Garanta que estas linhas estejam assim:
+    whiteSpace: 'pre-wrap', 
+    wordBreak: 'break-word',
+    display: 'inline-block', 
+    maxWidth: '90%',
+    margin: '0 auto' // Ajuda a manter centralizado se quebrar linha
+  }}
+>
+  {activeSubtitle.text}
+</span>
         </div>
       )}
 

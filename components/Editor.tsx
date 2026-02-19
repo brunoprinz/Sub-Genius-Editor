@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+﻿import React, { useRef, useEffect } from 'react';
 import { Subtitle } from '../types';
 import { formatTime } from '../utils/time';
 
@@ -92,12 +92,13 @@ export const Editor: React.FC<EditorProps> = ({
                 </button>
               </div>
               <textarea
-                className="w-full bg-transparent border-none text-sm text-gray-200 focus:ring-0 resize-none p-0 focus:text-white"
-                rows={2}
-                value={sub.text}
-                onChange={(e) => onUpdateSubtitle(sub.id, { text: e.target.value })}
-                placeholder="Texto da legenda..."
-              />
+  className="w-full bg-transparent border-none text-sm text-gray-200 focus:ring-0 resize-none p-0 focus:text-white"
+  style={{ whiteSpace: 'pre-wrap' }} // Adicione isso aqui
+  rows={2}
+  value={sub.text}
+  onChange={(e) => onUpdateSubtitle(sub.id, { text: e.target.value })}
+  placeholder="Texto da legenda..."
+/>
             </div>
           );
         })}
