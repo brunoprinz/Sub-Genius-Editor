@@ -103,36 +103,40 @@ export const Player: React.FC<PlayerProps> = ({
       />
       
       {/* Subtitle Overlay */}
-      {activeSubtitle && (
-        <div 
-          className="absolute left-0 right-0 flex justify-center pointer-events-none px-8"
-          style={getContainerPosition()}
-        >
-          <span
-  style={{
-    fontFamily: styleConfig.fontFamily,
-    fontSize: `${styleConfig.fontSize}px`,
-    color: styleConfig.color,
-    textShadow: getOutlineStyle(),
-    backgroundColor: styleConfig.backgroundOpacity > 0 ? hexToRgba(styleConfig.backgroundColor, styleConfig.backgroundOpacity) : 'transparent',
-    padding: '4px 8px',
-    borderRadius: '4px',
-    textAlign: 'center',
-    lineHeight: 1.2,
-// ESTES SÃO OS AJUSTES CRÍTICOS:
-    display: 'block',           // Mudamos de inline-block para block
-    width: 'fit-content',       // Faz a tarja preta envolver apenas o texto
-    maxWidth: '85%',            // Reduzimos um pouco para dar mais margem de segurança
-    margin: '0 auto',           // Centraliza o bloco inteiro horizontalmente
-    whiteSpace: 'pre-wrap',     // Mantém seus "Enters" manuais
-    wordBreak: 'break-word',    // Força a quebra se uma palavra for gigante
-    overflowWrap: 'anywhere',   // Garante que não escape de jeito nenhum
-  }}
->
-  {activeSubtitle.text}
-</span>
-        </div>
-      )}
+{activeSubtitle && (
+  <div 
+    className="absolute left-0 right-0 flex justify-center pointer-events-none"
+    style={{
+      ...getContainerPosition(),
+      width: '100%', // Força o container a ter a largura do vídeo
+      padding: '0 20px' // Margem de segurança para o texto não colar nas bordas
+    }}
+  >
+    <span
+      style={{
+        fontFamily: styleConfig.fontFamily,
+        fontSize: `${styleConfig.fontSize}px`,
+        color: styleConfig.color,
+        textShadow: getOutlineStyle(),
+        backgroundColor: styleConfig.backgroundOpacity > 0 
+          ? hexToRgba(styleConfig.backgroundColor, styleConfig.backgroundOpacity) 
+          : 'transparent',
+        padding: '6px 12px',
+        borderRadius: '4px',
+        textAlign: 'center',
+        lineHeight: 1.2,
+        whiteSpace: 'pre-wrap',
+        wordBreak: 'break-word',
+        // ADICIONE/CONFIRA ESTAS 3 LINHAS ABAIXO:
+    display: 'inline-block', 
+    maxWidth: '100%', 
+    overflowWrap: 'anywhere', // Isso aqui é o "xeque-mate" contra texto vazando
+      }}
+    >
+      {activeSubtitle.text}
+    </span>
+  </div>
+)}
 
       {/* Custom Controls (Simple) */}
       <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
