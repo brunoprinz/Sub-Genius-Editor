@@ -119,12 +119,14 @@ export const Player: React.FC<PlayerProps> = ({
     borderRadius: '4px',
     textAlign: 'center',
     lineHeight: 1.2,
-    // Garanta que estas linhas estejam assim:
-    whiteSpace: 'pre-wrap', 
-    wordBreak: 'break-word',
-    display: 'inline-block', 
-    maxWidth: '90%',
-    margin: '0 auto' // Ajuda a manter centralizado se quebrar linha
+// ESTES SÃO OS AJUSTES CRÍTICOS:
+    display: 'block',           // Mudamos de inline-block para block
+    width: 'fit-content',       // Faz a tarja preta envolver apenas o texto
+    maxWidth: '85%',            // Reduzimos um pouco para dar mais margem de segurança
+    margin: '0 auto',           // Centraliza o bloco inteiro horizontalmente
+    whiteSpace: 'pre-wrap',     // Mantém seus "Enters" manuais
+    wordBreak: 'break-word',    // Força a quebra se uma palavra for gigante
+    overflowWrap: 'anywhere',   // Garante que não escape de jeito nenhum
   }}
 >
   {activeSubtitle.text}
