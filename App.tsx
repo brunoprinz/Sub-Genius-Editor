@@ -52,8 +52,16 @@ const defaultStyle: StyleConfig = {
 }; // <--- A chave de fechamento tem que ser DEPOIS de tudo
 
 // Canvas Subtitle Renderer
+
 const drawSubtitles = (ctx: CanvasRenderingContext2D, subtitles: Subtitle[], time: number, style: StyleConfig, width: number, height: number) => {
-  const activeSubs = subtitles.filter(s => time >= s.startTime && time <= s.endTime);
+  // 1. Filtro Robusto: Garante que estamos comparando números reais, evitando que o app trave
+  const activeSubs = subtitles.filter(s => {
+    const start = parseFloat(s.startTime.toString());
+    const end = parseFloat(s.endTime.toString());
+    return time >= start && time <= end;
+  });
+
+  // Se não tem nada para desenhar, limpa o caminho e sai
   if (activeSubs.length === 0) return;
 
   ctx.save();
@@ -75,6 +83,7 @@ const drawSubtitles = (ctx: CanvasRenderingContext2D, subtitles: Subtitle[], tim
   }
   ctx.textBaseline = textBaseline;
 
+  // ... (o resto do código das linhas e retângulos continua igual abaixo)
   // Render each subtitle
   activeSubs.forEach(sub => {
     const lines = sub.text.split('\n');
